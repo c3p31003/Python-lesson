@@ -47,18 +47,26 @@ while True:
             if len(todo_list) == 0:
                 print("No todos to show.")
             else:
-                for item in todo_list:
-                    print(item)
-                print()
+                for i,item in enumerate(todo_list):
+                    print(f"{i+1}-{item}")
         case "edit":
             for i,t in enumerate(todo_list,1):
-                print(i,'-',t)
+                print(f"{i}-{t}")
             change_num = int(input("Choice a number to edit:")) -1
             if change_num < len(todo_list):
                 new_todo = input("Enter a new todo:")
                 todo_list[change_num] = new_todo
         case "clean":
             todo_list.clear()
+        case "complete":
+            while True:
+                for i,t in enumerate(todo_list,start=1):
+                    print(f"{i}-{t}")
+                delete_num = input("Choise a number of remove:")
+                del todo_list[int(delete_num)-1]
+                order = input("Choise continue or end:")
+                if order.lower() == "end":
+                    break
         case "exit":
             break
         #_ = whatever value that is not matched with the above cases
