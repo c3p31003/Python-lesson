@@ -37,10 +37,7 @@
 todo_list = []
 
 def show_list(todos):
-    with open("todos.txt","r") as file:
-        tods = file.readlines()
-
-    if len(todo_list) == 0:
+    if len(todos) == 0:
         print("No todos to show.")
     else:
         for i,item in enumerate(todos):
@@ -68,8 +65,12 @@ while True:
                 file.writelines(todo_list)      
 
         case "show" | "display":
+            with open("todos.txt", 'r') as file:
+                todo_list = file.readlines()
             show_list(todo_list)
         case "edit":
+            with open("todos.txt", 'r') as file:
+                todo_list = file.readlines()
             show_list(todo_list)
 
             change_num = int(input("Choice a number to edit:")) -1
@@ -86,20 +87,23 @@ while True:
             with open('todos.txt','w') as file:
                 file.writelines(todo_list)
         case "complete" | "c":
+            with open("todos.txt", 'r') as file:
+                todo_list = file.readlines()
+            
             while True:
                 show_list(todo_list)
-
-                delete_num = input("Choise a number of remove:")
-                # インデックスが有効か確認
+                
+                delete_num = input("Choose a number to remove:")
+                
                 if int(delete_num) <= len(todo_list) and int(delete_num) > 0:
-                    del todo_list[int(delete_num)-1]
-                    with open('todos.txt','w') as file:
-                        file.writelines([t + '\n' for t in todo_list])
+                    todo_list.pop(int(delete_num) - 1)
+                    with open('todos.txt', 'w') as file:
+                        file.writelines(todo_list)
                 else:
                     print("Invalid number!")
                     continue
-
-                order = input("Choise continue or end:")
+                
+                order = input("Choose continue or end:")
                 if order.lower() == "end":
                     break
         case "exit":
