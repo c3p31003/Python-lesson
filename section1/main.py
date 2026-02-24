@@ -36,6 +36,17 @@
 
 todo_list = []
 
+def show_list(todo_list):
+    with open("todos.txt","r") as file:
+        todo_list = file.readlines()
+
+    if len(todo_list) == 0:
+        print("No todos to show.")
+    else:
+        for i,item in enumerate(todo_list):
+            item = item.strip('\n')
+            print(f"{i+1}-{item}")
+
 while True:
     #Get user input and strip space chars from it
     user_action = input("Type add, show, edit, complete,  clean or exit:").strip()
@@ -57,19 +68,9 @@ while True:
                 file.writelines(todo_list)      
 
         case "show" | "display":
-            with open("todos.txt","r") as file:
-                todo_list = file.readlines()
-
-            if len(todo_list) == 0:
-                print("No todos to show.")
-            else:
-                for i,item in enumerate(todo_list):
-                    item = item.strip('\n')
-                    print(f"{i+1}-{item}")
+            show_list(todo_list)
         case "edit":
-            with open("todos.txt","r") as file:
-                todo_list = file.readlines()
-            print(todo_list)
+            show_list(todo_list)
 
             change_num = int(input("Choice a number to edit:")) -1
 
@@ -86,10 +87,14 @@ while True:
                 file.writelines(todo_list)
         case "complete":
             while True:
-                for i,t in enumerate(todo_list,start=1):
-                    print(f"{i}-{t}")
+                show_list(todo_list)
+
                 delete_num = input("Choise a number of remove:")
                 del todo_list[int(delete_num)-1]
+
+                with open('todos.txt','w') as file:
+                    file.writelines(todo_list)
+                    
                 order = input("Choise continue or end:")
                 if order.lower() == "end":
                     break
