@@ -46,7 +46,7 @@ def show_list(todos):
 
 while True:
     #Get user input and strip space chars from it
-    user_action = input("Type add, show, edit, complete,  clean or exit:").strip()
+    user_action = input("Type add, show, edit, complete, clean or exit:").strip()
     
     match user_action:
         case "add":
@@ -81,7 +81,7 @@ while True:
 
             with open('todos.txt','w') as file:
                 file.writelines(todo_list)
-            print(todo_list)
+            show_list(todo_list)
         case "clean":
             todo_list.clear()
             with open('todos.txt','w') as file:
@@ -93,10 +93,12 @@ while True:
             while True:
                 show_list(todo_list)
                 
-                delete_num = input("Choose a number to remove:")
+                delete_num = int(input("Choose a number to remove:"))
                 
-                if int(delete_num) <= len(todo_list) and int(delete_num) > 0:
-                    todo_list.pop(int(delete_num) - 1)
+                if delete_num <= len(todo_list) and int(delete_num) > 0:
+                    removed_todo = todo_list[delete_num - 1].strip('\n')
+                    print(f"{removed_todo} was removed from the list.")
+                    todo_list.pop(delete_num - 1)
                     with open('todos.txt', 'w') as file:
                         file.writelines(todo_list)
                 else:
