@@ -1,6 +1,8 @@
 def greet():
     message = "hello"
-    new_message = message.capitalize()
-    return new_message
+    # new_message = message.capitalize()
+    return message
 
-print(greet())
+greeting = greet()
+
+print(greeting.capitalize())
