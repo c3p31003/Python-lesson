@@ -44,6 +44,11 @@ def show_list(todos):
             item = item.strip('\n')
             print(f"{i+1}-{item}")
 
+def get_todos():
+    with open("todos.txt", 'r') as file:
+        todos_local = file.readlines()
+    return todos_local
+
 while True:
     #Get user input and strip space chars from it
     user_action = input("Type add, show, edit, complete, clean or exit:").strip()
@@ -51,8 +56,7 @@ while True:
     if user_action.startswith("add"):
         todo = user_action[4:] + "\n"
         
-        with open("todos.txt", 'r') as file:
-            todo_list = file.readlines()
+        todo_list = get_todos()
 
         todo_list.append(todo)
 
@@ -60,14 +64,13 @@ while True:
             file.writelines(todo_list)      
 
     elif user_action.startswith("show") or user_action.startswith("display"):
-        with open("todos.txt", 'r') as file:
-            todo_list = file.readlines()
+        todo_list = get_todos()
+
         show_list(todo_list)
 
     elif user_action.startswith("edit"):
         try:
-            with open("todos.txt", 'r') as file:
-                todo_list = file.readlines()
+            todo_list = get_todos()
             show_list(todo_list)
 
             change_num = int(input("Choice a number to edit:")) -1
@@ -89,8 +92,7 @@ while True:
             file.writelines(todo_list)
 
     elif user_action.startswith("complete") or user_action.startswith("c"):
-        with open("todos.txt", 'r') as file:
-            todo_list = file.readlines()
+        todo_list = get_todos()
         
         while True:
             show_list(todo_list)

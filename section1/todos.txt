@@ -1,3 +1,3 @@
-take a bath
-eat something
-Clean the bag
+Develop todo app
+Exercise
+Clean a room
