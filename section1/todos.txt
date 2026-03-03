@@ -1,3 +1,6 @@
 Develop todo app
 Exercise
 Clean a room
+Study python
+Wash a hand
+Cookning diner

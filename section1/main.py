@@ -1,38 +1,3 @@
-# user_prompt = "Enter a todo:"
-# todo1 = input(user_prompt)
-# todo2 = input(user_prompt)
-# todo3 = input(user_prompt)
-
-# todos = [todo1, todo2, todo3]
-
-# print(*todos)
-# print(type(user_prompt))
-# print(type(todos))
-
-# user_prompt = "Enter a todo:"
-
-# todo_list = []
-
-# def check_todo(todos):
-#             for i,t in enumerate(todos,start=1):
-#                 print(f"todo{i}: {t}")
-#                 # print(f"{t} index is {i-1}")
-# while True:
-#     todo = input(user_prompt)
-#     if todo == "quit":
-#         check_todo(todo_list)
-#         break
-#     todo_list.append(todo)
-    # print("todo has cleaned")
-    # print(todo_list)
-
-    # if len(todo_list) == 3:
-    #     check_todo(todo_list)
-    #     break
-    
-#dir(str)    
-    
-    
 
 todo_list = []
 
@@ -44,10 +9,14 @@ def show_list(todos):
             item = item.strip('\n')
             print(f"{i+1}-{item}")
 
-def get_todos():
-    with open("todos.txt", 'r') as file:
+def get_todos(filepath='todos.txt'):
+    with open(filepath, 'r') as file:
         todos_local = file.readlines()
     return todos_local
+
+def write_todos(todos,filepath='todos.txt'):
+    with open(filepath, 'w') as file:
+        file.writelines(todos)   
 
 while True:
     #Get user input and strip space chars from it
@@ -57,11 +26,9 @@ while True:
         todo = user_action[4:] + "\n"
         
         todo_list = get_todos()
-
         todo_list.append(todo)
 
-        with open("todos.txt", 'w') as file:
-            file.writelines(todo_list)      
+        write_todos(todo_list)   
 
     elif user_action.startswith("show") or user_action.startswith("display"):
         todo_list = get_todos()
@@ -79,8 +46,7 @@ while True:
                 new_todo = input("Enter a new todo:")
                 todo_list[change_num] = new_todo + '\n'
 
-            with open('todos.txt','w') as file:
-                file.writelines(todo_list)
+            write_todos(todo_list)  
             show_list(todo_list)
         except ValueError:
             print("Your command is not valid.")
@@ -88,8 +54,7 @@ while True:
 
     elif user_action.startswith("clean"):
         todo_list.clear()
-        with open('todos.txt','w') as file:
-            file.writelines(todo_list)
+        write_todos(todo_list)  
 
     elif user_action.startswith("complete") or user_action.startswith("c"):
         todo_list = get_todos()
@@ -104,8 +69,7 @@ while True:
                 removed_todo = todo_list[delete_num - 1].strip('\n')
                 print(f"{removed_todo} was removed from the list.")
                 todo_list.pop(delete_num - 1)
-                with open('todos.txt', 'w') as file:
-                    file.writelines(todo_list)
+                write_todos(todo_list)  
 
                 
                 order = input("Choose continue or end:")
