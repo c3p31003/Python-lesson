@@ -1,25 +1,7 @@
-
+from functions import show_list, get_todos, write_todos
 todo_list = []
 
-def show_list(todos):
-    if len(todos) == 0:
-        print("No todos to show.")
-    else:
-        for i,item in enumerate(todos):
-            item = item.strip('\n')
-            print(f"{i+1}-{item}")
-
-def get_todos(filepath='todos.txt'):
-    """ Read a text file and return the list of to-do items."""
-    with open(filepath, 'r') as file:
-        todos_local = file.readlines()
-    return todos_local
-
-def write_todos(todos,filepath='todos.txt'):
-    """ Write the to-do item list in the text file."""
-    with open(filepath, 'w') as file:
-        file.writelines(todos)   
-
+ 
 while True:
     #Get user input and strip space chars from it
     user_action = input("Type add, show, edit, complete, clean or exit:").strip()

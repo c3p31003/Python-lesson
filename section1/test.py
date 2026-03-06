@@ -37,4 +37,13 @@ def speed(time,distance,):
     return distance / time
     
 print(speed(5, 300))
+
+
+test = """
+Priciples of productivity:
+Managing your inflow.
+Systemizing everythins that repeats.
+"""
+
+print(test)
     
