@@ -4,3 +4,4 @@ Study python
 Wash a hand
 Cookning diner
 Go to cafe and drinking a new-released drink
+add something todo

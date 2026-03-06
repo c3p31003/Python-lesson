@@ -1,4 +1,5 @@
-from functions import show_list, get_todos, write_todos
+# from functions import show_list, get_todos, write_todos
+import functions
 todo_list = []
 
  
@@ -9,20 +10,20 @@ while True:
     if user_action.startswith("add"):
         todo = user_action[4:] + "\n"
         
-        todo_list = get_todos()
+        todo_list = functions.get_todos()
         todo_list.append(todo)
 
-        write_todos(todo_list)   
+        functions.write_todos(todo_list)   
 
     elif user_action.startswith("show") or user_action.startswith("display"):
-        todo_list = get_todos()
+        todo_list = functions.get_todos()
 
-        show_list(todo_list)
+        functions.show_list(todo_list)
 
     elif user_action.startswith("edit"):
         try:
-            todo_list = get_todos()
-            show_list(todo_list)
+            todo_list = functions.get_todos()
+            functions.show_list(todo_list)
 
             change_num = int(input("Choice a number to edit:")) -1
 
@@ -30,21 +31,21 @@ while True:
                 new_todo = input("Enter a new todo:")
                 todo_list[change_num] = new_todo + '\n'
 
-            write_todos(todo_list)  
-            show_list(todo_list)
+            functions.write_todos(todo_list)  
+            functions.show_list(todo_list)
         except ValueError:
             print("Your command is not valid.")
             continue
 
     elif user_action.startswith("clean"):
         todo_list.clear()
-        write_todos(todo_list)  
+        functions.write_todos(todo_list)  
 
     elif user_action.startswith("complete") or user_action.startswith("c"):
-        todo_list = get_todos()
+        todo_list = functions.get_todos()
         
         while True:
-            show_list(todo_list)
+            functions.show_list(todo_list)
 
             try:   
                 delete_num = int(input("Choose a number to remove:"))
@@ -53,7 +54,7 @@ while True:
                 removed_todo = todo_list[delete_num - 1].strip('\n')
                 print(f"{removed_todo} was removed from the list.")
                 todo_list.pop(delete_num - 1)
-                write_todos(todo_list)  
+                functions.write_todos(todo_list)  
 
                 
                 order = input("Choose continue or end:")
