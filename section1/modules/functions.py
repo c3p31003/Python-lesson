@@ -16,3 +16,7 @@ def write_todos(todos,filepath='todos.txt'):
     """ Write the to-do item list in the text file."""
     with open(filepath, 'w') as file:
         file.writelines(todos)  
+
+if __name__ == "__main__":
+    print("Hello! from function.py")
+    print(get_todos())
