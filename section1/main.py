@@ -1,8 +1,11 @@
 # from functions import show_list, get_todos, write_todos
 from modules import functions
-todo_list = []
+import time
 
- 
+todo_list = []
+now = time.strftime("%b %d, %H:%M:%S")
+print("It is "+now)
+
 while True:
     #Get user input and strip space chars from it
     user_action = input("Type add, show, edit, complete, clean or exit:").strip()
